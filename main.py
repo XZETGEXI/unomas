@@ -48,6 +48,45 @@ Also, he can see his opponent's cards.
 '''
 
 
+
+
+welcome_fr = '''
+            Bienvenue dans Uno Màs !
+-------------------------------------------
+
+____________
+1. L'aveugle
+
+L'aveugle peut poser sa carte si elle a la même couleur
+(comme du trèfle sur du pique)
+
+___________
+2. La brute
+
+La brute peut doubler l'effet d'une carte
+(comme changer un +1 en +2)
+
+______________
+3. Le chimiste
+
+Le chimiste peut poser une carte avec 1 en dessus ou 1 en dessous
+(comme poser un 5 ou un 7 sur un 6)
+
+_____________
+4. La voyante
+
+La voyante peut regarder le jeu d'un joueur
+
+______________
+5. Le tricheur
+
+Le tricheur peut défausser une de ses cartes
+
+-------------------------------------------
+'''
+   
+   
+            
 # Constants
 SUITS = ['C', 'D', 'H', 'S']
 VALUES = [str(n + 1) for n in range(10)] + ['J', 'Q', 'K']
@@ -161,6 +200,19 @@ def get_icons(card):
 
 
 
+def is_the_card_valid(card, current_card):
+    value, suit = card
+    current_value, current_suit = current_card
+    
+    if value ==  '8':
+        return True
+    elif value == current_value:
+        return True
+    elif suit == current_suit:
+        return True
+    else:
+        return False
+
 
 
 
@@ -250,6 +302,7 @@ def start_game():
     
     stack = shuffle_stack(stack)
     
+    
     player_name, enemy_name = generate_characters_names()
     
     player_cards = []
@@ -266,6 +319,9 @@ def start_game():
     enemy = Enemy(enemy_name, enemy_cards)
     
     game_state = (stack, current_card, player, enemy)
+    
+    print(player.cards)
+    print([card[0] for card in player.cards])
     
     return game_state
     
